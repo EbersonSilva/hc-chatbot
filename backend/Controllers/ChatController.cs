@@ -43,11 +43,12 @@ namespace backend.Controllers
             {
                 model = "gpt-3.5-turbo",
                 messages = prompt,
-                temperature = 0.7
+                temperature = 0.5
             };
 
             // variavel da chave da API
-            var apiKey = _config["OpenAI:ApiKey"];
+            var apiKey = Environment.GetEnvironmentVariable("OPENAI_API_KEY") 
+             ?? _config["OpenAI:ApiKey"];
 
             if (string.IsNullOrEmpty(apiKey))
                 return StatusCode(500, "API Key não foi encontrada.");
