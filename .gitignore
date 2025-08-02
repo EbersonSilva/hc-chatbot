@@ -1,0 +1,39 @@
+# 👉 Pastas geradas automaticamente (compilação)
+bin/
+obj/
+out/
+
+# 👉 Configurações do usuário e do VSCode
+.vscode/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# 👉 Arquivos sensíveis
+appsettings.json
+appsettings.*.json
+
+# 👉 Dados de build/teste temporários
+*.db
+*.log
+*.pid
+*.coverage
+*.DS_Store
+
+# 👉 Cache do Rider/VS e outros IDEs
+.idea/
+.ReSharper/
+*.DotSettings.user
+
+# 👉 Pacotes e dependências locais
+*.nupkg
+packages/
+project.lock.json
+
+# 👉 Linux/macOS/Lixo do sistema
+*.swp
+*.bak
+*.tmp
+Thumbs.db
+.DS_Store
