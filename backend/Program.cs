@@ -12,6 +12,17 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+// 👉 Adiciona a política de CORS
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowLocalhost5173", policy =>
+    {
+        policy.WithOrigins("http://localhost:5173")
+              .AllowAnyHeader()
+              .AllowAnyMethod();
+    });
+});
+
 var app = builder.Build();
 
 // Swagger (somente em dev)
@@ -21,11 +32,17 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-// HTTPS e Controllers
+// HTTPS redirection
 app.UseHttpsRedirection();
+
+// 👉 Usa a política de CORS aqui (ANTES dos controllers)
+app.UseCors("AllowLocalhost5173");
+
+app.UseAuthorization();
+
 app.MapControllers();
 
-// Exemplo de rota minimalista
+// Rota de exemplo (opcional)
 var summaries = new[]
 {
     "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"

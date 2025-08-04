@@ -3,11 +3,20 @@ using System;
 namespace backend.Models
 {
     public class Mensagem
-{
-    public int Id { get; set; }
-    public string? TextoUsuario { get; set; }
-    public string? RespostaBot { get; set; }
-    public Bot? Bot { get; set; }
-}
+    {
+        public int Id { get; set; }
 
+        // Obrigatório, pois você sempre envia esse valor
+        public string TextoUsuario { get; set; } = string.Empty;
+
+        public string RespostaBot { get; set; } = string.Empty;
+
+        public DateTime DataHora { get; set; }
+
+        // Chave estrangeira
+        public int BotId { get; set; }
+
+        // Navegação
+        public Bot Bot { get; set; } = null!;
+    }
 }
