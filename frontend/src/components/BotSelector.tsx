@@ -11,15 +11,15 @@ interface BotSelectorProps {
 
 export default function BotSelector({ onSelect }: BotSelectorProps) {
   const [bots, setBots] = useState<Bot[]>([]);
-  const [ setSelectedId] = useState<number | null>(null);
+  const [selectedId, setSelectedId] = useState<number | null>(null);
 
   useEffect(() => {
     fetch('http://localhost:5013/api/bots')
       .then((res) => res.json())
-      .then(data => {
-    console.log('Bots recebidos:', data); // <-- VER AQUI NO CONSOLE
-    setBots(data);
-  })
+      .then((data) => {
+        console.log('Bots recebidos:', data);
+        setBots(data);
+      })
       .catch((err) => console.error('Erro ao buscar bots:', err));
   }, []);
 

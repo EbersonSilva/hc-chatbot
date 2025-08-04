@@ -58,18 +58,21 @@ export function App() {
 
   return (
     <Layout>
-      <h2 className="text-xl mb-2 text-white">Converse com o chatbot:</h2>
-      <BotSelector onSelect={(bot) => {
-        <BotForm />
-        setSelectedBot(bot);
-        setMessages([]); // limpa histórico ao trocar de bot
-      }} />
-      {selectedBot && (
-        <>
-          <ChatBox messages={messages} />
-          <MessageInput onSend={handleSendMessage} loading={loading} />
-        </>
-      )}
-    </Layout>
+  <h2 className="text-xl mb-2 text-white">Converse com o chatbot:</h2>
+  <BotSelector onSelect={(bot) => {
+    setSelectedBot(bot);
+    setMessages([]);
+  }} />
+  
+  <BotForm /> {/* Aqui aparece o formulário */}
+
+  {selectedBot && (
+    <>
+      <ChatBox messages={messages} />
+      <MessageInput onSend={handleSendMessage} loading={loading} />
+    </>
+  )}
+</Layout>
+
   );
 }

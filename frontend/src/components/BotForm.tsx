@@ -1,3 +1,4 @@
+// src/components/BotForm.tsx
 import { useState } from 'react';
 
 export default function BotForm() {
@@ -7,66 +8,50 @@ export default function BotForm() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-
-    if (!nome.trim() || !contexto.trim()) {
-      setMensagem('Preencha todos os campos!');
-      return;
-    }
+    if (!nome || !contexto) return;
 
     try {
-      const res = await fetch('http://localhost:5000/api/bots', {
+      const response = await fetch('http://localhost:5013/api/bots', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ nome, contexto }),
       });
 
-      if (res.ok) {
+      if (response.ok) {
         setMensagem('Bot criado com sucesso!');
         setNome('');
         setContexto('');
       } else {
-        setMensagem('Erro ao criar bot.');
+        setMensagem('Erro ao criar o bot.');
       }
-    } catch (error) {
-      console.error(error);
-      setMensagem('Erro ao se conectar com o servidor.');
+    } catch (err) {
+      console.error(err);
+      setMensagem('Erro de conexão com o servidor.');
     }
   };
 
   return (
-    <form onSubmit={handleSubmit} className="bg-zinc-800 p-4 rounded mb-6 shadow-md">
-      <h3 className="text-white text-lg mb-4">Criar Novo Bot</h3>
-
-      <div className="mb-2">
-        <label className="text-white block mb-1">Nome do Bot:</label>
+    <div className="bg-zinc-800 p-4 rounded mt-6">
+      <h3 className="text-white text-lg mb-2">Criar novo bot</h3>
+      <form onSubmit={handleSubmit}>
         <input
           type="text"
           value={nome}
           onChange={(e) => setNome(e.target.value)}
-          className="w-full p-2 rounded bg-zinc-700 text-white"
+          placeholder="Nome do bot"
+          className="p-2 mr-2 mb-2 rounded w-full bg-zinc-700 text-white"
         />
-      </div>
-
-      <div className="mb-2">
-        <label className="text-white block mb-1">Contexto (instruções para o bot):</label>
         <textarea
           value={contexto}
           onChange={(e) => setContexto(e.target.value)}
-          rows={4}
-          className="w-full p-2 rounded bg-zinc-700 text-white resize-none"
+          placeholder="Contexto do bot"
+          className="p-2 mb-2 rounded w-full bg-zinc-700 text-white"
         />
-      </div>
-
-      <button
-        type="submit"
-        className="mt-2 bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded"
-      >
-        Criar Bot
-      </button>
-
-      {mensagem && (
-        <p className="mt-2 text-sm text-green-400">{mensagem}</p>
-      )}
-    </form>
+        <button type="submit" className="bg-blue-500 text-white px-4 py-2 rounded">
+          Criar Bot
+        </button>
+      </form>
+      {mensagem && <p className="text-white mt-2">{mensagem}</p>}
+    </div>
   );
 }
