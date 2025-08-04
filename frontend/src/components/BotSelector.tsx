@@ -6,12 +6,12 @@ interface Bot {
 }
 
 interface BotSelectorProps {
+  selectedBot: Bot | null; // <- novo
   onSelect: (bot: Bot) => void;
 }
 
-export default function BotSelector({ onSelect }: BotSelectorProps) {
+export default function BotSelector({ selectedBot, onSelect }: BotSelectorProps) {
   const [bots, setBots] = useState<Bot[]>([]);
-  const [selectedId, setSelectedId] = useState<number | null>(null);
 
   useEffect(() => {
     fetch('http://localhost:5013/api/bots')
@@ -26,7 +26,6 @@ export default function BotSelector({ onSelect }: BotSelectorProps) {
   const handleSelect = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const bot = bots.find((b) => b.id === parseInt(e.target.value));
     if (bot) {
-      setSelectedId(bot.id);
       onSelect(bot);
     }
   };
@@ -35,9 +34,9 @@ export default function BotSelector({ onSelect }: BotSelectorProps) {
     <div className="mb-4">
       <label className="text-white mr-2">Selecione um bot:</label>
       <select
+        value={selectedBot?.id || ''} // <- mantêm selecionado
         onChange={handleSelect}
         className="bg-zinc-700 text-white p-2 rounded"
-        defaultValue=""
       >
         <option value="" disabled>Escolha um bot</option>
         {bots.map((bot) => (

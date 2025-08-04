@@ -1,9 +1,11 @@
-import { useState } from 'react';
+import { useLocation } from 'react-router-dom';
+import { useEffect, useState } from 'react';
 import Layout from './components/Layout';
 import MessageInput from './components/MessageInput';
 import ChatBox from './components/ChatBox';
 import BotSelector from './components/BotSelector';
-import BotForm from './components/BotForm';
+import { Link } from 'react-router-dom';
+
 
 interface Message {
   sender: 'user' | 'bot';
@@ -19,6 +21,29 @@ export function App() {
   const [messages, setMessages] = useState<Message[]>([]);
   const [loading, setLoading] = useState(false);
   const [selectedBot, setSelectedBot] = useState<Bot | null>(null);
+  const location = useLocation();
+
+ useEffect(() => {
+    if (location.state?.bot) {
+      setSelectedBot(location.state.bot);
+    }
+  }, [location.state]);
+
+  const fetchHistorico = async (botId: number) => {
+    try {
+      const res = await fetch(`http://localhost:5013/api/chat/${botId}/mensagens`);
+      const data = await res.json();
+
+      const msgs: Message[] = data.map((m: any) => [
+        { sender: 'user', text: m.textoUsuario },
+        { sender: 'bot', text: m.respostaBot }
+      ]).flat();
+
+      setMessages(msgs);
+    } catch (err) {
+      console.error('Erro ao buscar histórico:', err);
+    }
+  };
 
   const handleSendMessage = async (message: string) => {
     if (!message.trim() || !selectedBot) return;
@@ -37,7 +62,7 @@ export function App() {
         }),
       });
 
-      const data = await response.json();
+     const data = await response.json();
 
       const botMessage: Message = {
         sender: 'bot',
@@ -56,23 +81,34 @@ export function App() {
     }
   };
 
-  return (
+ return (
     <Layout>
-  <h2 className="text-xl mb-2 text-white">Converse com o chatbot:</h2>
-  <BotSelector onSelect={(bot) => {
+      <h2 className="text-xl mb-2 text-white">Converse com o chatbot:</h2>
+
+      <Link
+  to="/criar-bot"
+  className="text-blue-400 hover:underline mb-4 block"
+>
+  + Criar novo bot
+</Link>
+
+      
+      <BotSelector
+  selectedBot={selectedBot}
+  onSelect={(bot) => {
     setSelectedBot(bot);
-    setMessages([]);
-  }} />
-  
-  <BotForm /> {/* Aqui aparece o formulário */}
+    fetchHistorico(bot.id); // agora sim, chama a função certa!
+  }}
+/>
 
-  {selectedBot && (
-    <>
-      <ChatBox messages={messages} />
-      <MessageInput onSend={handleSendMessage} loading={loading} />
-    </>
-  )}
-</Layout>
 
+      {/* Chat apenas se houver bot selecionado */}
+      {selectedBot && (
+        <>
+          <ChatBox messages={messages} />
+          <MessageInput onSend={handleSendMessage} loading={loading} />
+        </>
+      )}
+    </Layout>
   );
 }

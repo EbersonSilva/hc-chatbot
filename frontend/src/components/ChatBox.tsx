@@ -2,6 +2,7 @@ import { useEffect, useRef } from 'react';
 import UserMessage from './UserMessage';
 import BotMessage from './BotMessage';
 
+
 interface Message {
   sender: 'user' | 'bot';
   text: string;

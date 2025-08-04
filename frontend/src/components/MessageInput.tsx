@@ -1,5 +1,4 @@
-// src/components/MessageInput.tsx
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 
 interface MessageInputProps {
   onSend: (message: string) => void;
@@ -8,17 +7,20 @@ interface MessageInputProps {
 
 export default function MessageInput({ onSend, loading }: MessageInputProps) {
   const [text, setText] = useState('');
+  const inputRef = useRef<HTMLInputElement>(null); // 👈 cria ref
 
   const handleSend = () => {
     const trimmed = text.trim();
     if (trimmed) {
       onSend(trimmed);
       setText('');
+      inputRef.current?.focus(); // 👈 foca o input após enviar
     }
   };
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter') {
+      e.preventDefault(); // evita recarregar em forms eventuais
       handleSend();
     }
   };
@@ -26,6 +28,7 @@ export default function MessageInput({ onSend, loading }: MessageInputProps) {
   return (
     <div className="flex gap-2 mt-4">
       <input
+        ref={inputRef} // 👈 conecta a ref aqui
         type="text"
         value={text}
         onChange={(e) => setText(e.target.value)}
