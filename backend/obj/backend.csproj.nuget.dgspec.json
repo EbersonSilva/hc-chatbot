@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Eberson Silva\\Desktop\\Desafio-tecnico\\backend\\backend.csproj": {}
+    "C:\\Users\\eberson.silva\\desktop\\hc-chatbot\\backend\\backend.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Eberson Silva\\Desktop\\Desafio-tecnico\\backend\\backend.csproj": {
+    "C:\\Users\\eberson.silva\\desktop\\hc-chatbot\\backend\\backend.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Eberson Silva\\Desktop\\Desafio-tecnico\\backend\\backend.csproj",
+        "projectUniqueName": "C:\\Users\\eberson.silva\\desktop\\hc-chatbot\\backend\\backend.csproj",
         "projectName": "backend",
-        "projectPath": "C:\\Users\\Eberson Silva\\Desktop\\Desafio-tecnico\\backend\\backend.csproj",
-        "packagesPath": "C:\\Users\\Eberson Silva\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Eberson Silva\\Desktop\\Desafio-tecnico\\backend\\obj\\",
+        "projectPath": "C:\\Users\\eberson.silva\\desktop\\hc-chatbot\\backend\\backend.csproj",
+        "packagesPath": "C:\\Users\\eberson.silva\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\eberson.silva\\desktop\\hc-chatbot\\backend\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Eberson Silva\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\eberson.silva\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net9.0"
