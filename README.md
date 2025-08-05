@@ -27,7 +27,6 @@ Aplicação full-stack que permite criar bots personalizados com contexto e inte
 - ✅ Enviar mensagens e receber respostas com IA (OpenAI)
 - ✅ Histórico de conversas por bot
 - ✅ Separação frontend e backend
-- ✅ Dark mode com layout responsivo
 - ✅ Armazenamento local via SQLite
 
 ---
