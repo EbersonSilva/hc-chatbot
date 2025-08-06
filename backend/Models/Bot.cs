@@ -1,3 +1,4 @@
+//Modelo de dados para o Bot
 using System.Collections.Generic;
 
 namespace backend.Models

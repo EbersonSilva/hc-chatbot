@@ -1,5 +1,5 @@
 
-using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore; //facilita a comunicação com o banco de dados
 using backend.Models;
 
 namespace backend.Data
@@ -8,7 +8,7 @@ namespace backend.Data
     {
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
 
-        public DbSet<Bot> Bots { get; set; }
-        public DbSet<Mensagem> Mensagens { get; set; }
+        public DbSet<Bot> Bots { get; set; } //Tabela de Bots
+        public DbSet<Mensagem> Mensagens { get; set; } //Tabela de Mensagens
     }
 }

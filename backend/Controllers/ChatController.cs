@@ -1,3 +1,4 @@
+//Lida com requisições relacionadas ao chat, como enviar mensagens e obter histórico
 using Microsoft.AspNetCore.Mvc;
 using backend.Data;
 using backend.DTOs;
@@ -76,7 +77,7 @@ namespace backend.Controllers
                 BotId = bot.Id,
                 TextoUsuario = request.MensagemUsuario,
                 RespostaBot = resposta,
-                DataHora = DateTime.Now
+                DataHora = DateTime.Now     
             };
 
             _context.Mensagens.Add(mensagem);

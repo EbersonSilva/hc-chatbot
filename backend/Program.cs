@@ -7,12 +7,12 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlite("Data Source=chatbot.db"));
 
-// Controllers e Swagger
+// Controllers e Swagger para documentação da API
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-// 👉 Adiciona a política de CORS
+// Adiciona a política de CORS para permitir requisições do frontend React.js
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowLocalhost5173", policy =>
@@ -25,7 +25,7 @@ builder.Services.AddCors(options =>
 
 var app = builder.Build();
 
-// Swagger (somente em dev)
+// Swagger (somente em development)
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
@@ -35,7 +35,7 @@ if (app.Environment.IsDevelopment())
 // HTTPS redirection
 app.UseHttpsRedirection();
 
-// 👉 Usa a política de CORS aqui (ANTES dos controllers)
+//  Usa a política de CORS
 app.UseCors("AllowLocalhost5173");
 
 app.UseAuthorization();
@@ -61,6 +61,7 @@ app.MapGet("/weatherforecast", () =>
 })
 .WithName("GetWeatherForecast");
 
+//Inicio do servidor Web
 app.Run();
 
 record WeatherForecast(DateOnly Date, int TemperatureC, string? Summary)

@@ -1,3 +1,4 @@
+//Responsavel por gerenciar e criar os bots
 using Microsoft.AspNetCore.Mvc;
 using backend.Data;
 using backend.Models;

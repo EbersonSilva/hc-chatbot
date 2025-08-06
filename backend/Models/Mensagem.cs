@@ -1,3 +1,5 @@
+// Modelo de dados para a Mensagem, que armazena informações sobre as interações entre o usuário e o bot
+
 using System;
 
 namespace backend.Models
@@ -10,7 +12,7 @@ namespace backend.Models
         public string TextoUsuario { get; set; } = string.Empty;
 
         public string RespostaBot { get; set; } = string.Empty;
-
+    
         public DateTime DataHora { get; set; }
 
         // Chave estrangeira
